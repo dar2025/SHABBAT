@@ -9,8 +9,8 @@
 *.local
 
 # Capacitor/Native artifacts - CRITICAL for GitHub!
-/android/
-/ios/
+#/android/  <--- הוספת # לביטול ההתעלמות!
+#/ios/     <--- הוספת # לביטול ההתעלמות!
 
 # Logs
 logs
