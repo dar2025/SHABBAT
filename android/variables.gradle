@@ -1,7 +1,14 @@
 ext {
+    // הגדרות SDK קיימות
     minSdkVersion = 23
     compileSdkVersion = 35
     targetSdkVersion = 35
+    
+    // הגדרת גרסאות Java ו-Kotlin גלובליות לפתרון שגיאת "invalid source release: 21"
+    kotlin_stdlib_version = '1.9.24'
+    java_version = '17'
+    
+    // שאר הגרסאות הקיימות
     androidxActivityVersion = '1.9.2'
     androidxAppCompatVersion = '1.7.0'
     androidxCoordinatorLayoutVersion = '1.2.0'
