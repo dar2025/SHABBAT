@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ble-esp32-remote</string>
+    <string name="title_activity_main">ble-esp32-remote</string>
+    <string name="package_name">com.esp32.remote</string>
+    <string name="custom_url_scheme">com.esp32.remote</string>
+</resources>
