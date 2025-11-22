@@ -21,25 +21,25 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      # 1. Build the web assets (Fixes the White Screen issue by using Vite config)
+      # 1. Build the web assets
       - name: Build Web Assets
         run: npm run build
 
-      # 2. Add Android Platform (necessary since we ignored /android in gitignore)
-      - name: Add Android Platform
-        run: npx cap add android
-
-      # 3. Copy web assets into the native project
+      # 2. Sync Capacitor
+      # פקודה זו מעבירה את קבצי ה-web build לתיקיית android הקיימת.
+      # הסרנו את 'npx cap add android' כיוון שהתיקייה כבר נמצאת במאגר.
       - name: Sync Capacitor
         run: npx cap sync
 
-      # 4. Set up Java and Gradle
+      # 3. Set up Java and Gradle
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          # זוהי הגרסה המומלצת עבור Gradle (Java 17).
+          distribution: 'temurin' 
           java-version: '17'
 
+      # 4. Build Android APK
       - name: Build Android APK
         run: |
           cd android
