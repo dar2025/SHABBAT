@@ -4,8 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 // משנים מ-@ לשימוש בנתיב יחסי, המצביע על תיקיית המשנה הנכונה
 import { createPageUrl } from "./utils/index"; 
 import { LayoutDashboard, Zap } from "lucide-react";
+
+// ייבוא מפורש של הרכיבים הנלווים (SidebarContent, SidebarProvider, וכו')
 import {
-  Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
@@ -15,7 +16,10 @@ import {
   SidebarHeader,
   SidebarProvider,
   SidebarTrigger,
-} from "./components/sidebar"; // <--- הנתיב המתוקן!
+} from "./components/sidebar"; 
+
+// ייבוא ברירת מחדל נפרד של Sidebar (הפותר את השגיאה האחרונה!)
+import Sidebar from "./components/sidebar"; 
 // ----------------------------------------------------
 
 const navigationItems = [
