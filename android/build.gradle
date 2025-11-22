@@ -13,7 +13,8 @@ buildscript {
         classpath 'com.google.gms:google-services:4.4.2'
         // ⭐ 3. התיקון הקריטי לשגיאת "kotlin-android not found" ⭐
         // משתמש בגרסת Kotlin שהוגדרה ב-variables.gradle
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_stdlib_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.10"
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
