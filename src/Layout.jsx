@@ -15,7 +15,7 @@ import {
   SidebarHeader,
   SidebarProvider,
   SidebarTrigger,
-} from "./components/ui/sidebar"; // מצביע ל-src/components/ui/sidebar
+} from "./components/sidebar"; // <--- הנתיב המתוקן!
 // ----------------------------------------------------
 
 const navigationItems = [
