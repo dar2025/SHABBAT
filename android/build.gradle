@@ -7,14 +7,20 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        // 1. Android Gradle Plugin (AGP) - תיקון קודם
         classpath 'com.android.tools.build:gradle:8.1.4'
+        // 2. Google Services
         classpath 'com.google.gms:google-services:4.4.2'
+        // ⭐ 3. התיקון הקריטי לשגיאת "kotlin-android not found" ⭐
+        // משתמש בגרסת Kotlin שהוגדרה ב-variables.gradle
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_stdlib_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
+// ⭐ 4. יישום הקובץ variables.gradle (מביא את compileSdkVersion) ⭐
 apply from: "variables.gradle"
 
 allprojects {
