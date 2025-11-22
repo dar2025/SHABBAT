@@ -1,0 +1,72 @@
+import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { MessageSquare, CheckCircle, XCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export default function ESP32StatusCard({ message, isConnected }) {
+  const getMessageStyle = () => {
+    if (!message || !isConnected) return { 
+      icon: <MessageSquare className="w-5 h-5 text-gray-400"/>, 
+      bgClass: 'bg-gray-50',
+      textClass: 'text-gray-600'
+    };
+    if (message.includes('✅')) return { 
+      icon: <CheckCircle className="w-5 h-5 text-green-600"/>, 
+      bgClass: 'bg-green-50 border-green-200',
+      textClass: 'text-green-800'
+    };
+    if (message.includes('❌')) return { 
+      icon: <XCircle className="w-5 h-5 text-red-600"/>, 
+      bgClass: 'bg-red-50 border-red-200',
+      textClass: 'text-red-800'
+    };
+    if (message.includes('📤') || message.includes('⏳')) return { 
+      icon: <Loader2 className="w-5 h-5 text-blue-600 animate-spin"/>, 
+      bgClass: 'bg-blue-50 border-blue-200',
+      textClass: 'text-blue-800'
+    };
+    return { 
+      icon: <AlertCircle className="w-5 h-5 text-blue-600"/>, 
+      bgClass: 'bg-blue-50 border-blue-200',
+      textClass: 'text-blue-800'
+    };
+  };
+
+  const { icon, bgClass, textClass } = getMessageStyle();
+  const isLongMessage = message && message.length > 30;
+
+  return (
+    <Card className={`border-2 shadow-lg transition-all duration-300 ${bgClass}`}>
+      <CardContent className="p-4">
+        <div className="flex items-start gap-3">
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {icon}
+            <span className="font-bold text-base text-gray-800">Status:</span>
+          </div>
+          <AnimatePresence mode="wait">
+            {message && isConnected ? (
+              <motion.div
+                key={message}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex-1 min-w-0"
+              >
+                <p className={`text-sm font-semibold ${textClass} ${isLongMessage ? 'line-clamp-2' : 'truncate'}`}>{message}</p>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex-1"
+              >
+                <p className="text-sm text-gray-400 font-medium">{isConnected ? 'Waiting for messages...' : 'Not connected'}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}

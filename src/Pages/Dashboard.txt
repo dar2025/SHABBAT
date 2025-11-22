@@ -1,0 +1,30 @@
+
+import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Clock, RefreshCw, Upload, Battery, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+
+export default function DeviceControlsDropdown({ 
+  isConnected, 
+  esp32Time, // This prop will trigger the temporary display
+  batteryVoltage, 
+  onGetTime, 
+  onUpdateTime, 
+  onGetBattery, 
+  onReset 
+}) {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(null);
+  
+  // State for temporarily displaying ESP32 time
+  const [tempEsp32Time, setTempEsp32Time] = React.useState(null);
+  const timeDisplayTimeoutRef = React.useRef(null);
+
+  // State for "Sync Now" message
+  const [syncStatusMessage, setSyncStatusMessage] = React.useState(null);
+  const syncMessageTimeoutRef = React.useRef(null);
+
+  // Effect to manage the 5-second display of esp32Time
+  React.useEffect(() => {
+ 

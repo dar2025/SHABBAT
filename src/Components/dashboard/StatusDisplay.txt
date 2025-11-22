@@ -1,0 +1,30 @@
+import React from 'react';
+import { AlertCircle, CheckCircle, XCircle } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+export default function StatusDisplay({ message }) {
+  if (!message) return null;
+
+  const getIconAndStyle = () => {
+    if (message.includes('✅')) return { icon: <CheckCircle className="w-5 h-5 text-green-600"/>, style: 'bg-green-50 border-green-200 text-green-800' };
+    if (message.includes('❌')) return { icon: <XCircle className="w-5 h-5 text-red-600"/>, style: 'bg-red-50 border-red-200 text-red-800' };
+    return { icon: <AlertCircle className="w-5 h-5 text-blue-600"/>, style: 'bg-blue-50 border-blue-200 text-blue-800' };
+  };
+
+  const { icon, style } = getIconAndStyle();
+  
+  return (
+    <AnimatePresence>
+      <motion.div
+        key={message}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        className={`p-4 rounded-lg border flex items-center gap-3 ${style}`}
+      >
+        {icon}
+        <span className="font-medium text-sm flex-1">{message}</span>
+      </motion.div>
+    </AnimatePresence>
+  );
+}

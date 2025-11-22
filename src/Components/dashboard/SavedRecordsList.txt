@@ -1,0 +1,37 @@
+
+import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { RefreshCw, CheckCircle, Clock, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+
+export default function SavedRecordsList({ isConnected, savedRecords, onRefresh, isLoading }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const getStatusBadge = (status) => {
+    switch (status) {
+      case 'completed': return <Badge className="bg-green-500 text-white text-sm px-2 py-1 font-bold shadow-sm">Done</Badge>;
+      case 'active': return <Badge className="bg-blue-500 text-white animate-pulse text-sm px-2 py-1 font-bold shadow-sm">Active</Badge>;
+      case 'future': return <Badge className="bg-orange-500 text-white text-sm px-2 py-1 font-bold shadow-sm">Pending</Badge>;
+      default: return null;
+    }
+  };
+
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case 'completed': return <CheckCircle className="w-6 h-6 text-green-500" />;
+      case 'active': return <Clock className="w-6 h-6 text-blue-500" />;
+      case 'future': return <Calendar className="w-6 h-6 text-orange-500" />;
+      default: return <Calendar className="w-6 h-6 text-gray-400" />;
+    }
+  };
+
+  const handleRefresh = (e) => {
+    e.stopPropagation();
+    setIsOpen(true); // Open dropdown when refresh is clicked
+    onRefresh();
+  };
+
+ 

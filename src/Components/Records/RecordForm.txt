@@ -1,0 +1,37 @@
+
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Plus, Save, X } from 'lucide-react';
+import { format, addMinutes } from 'date-fns';
+
+export default function RecordForm({ onSubmit, editingRecord, onCancelEdit }) {
+  const [date, setDate] = React.useState(format(new Date(), 'yyyy-MM-dd'));
+  const [startTime, setStartTime] = React.useState('08:00');
+  const [durationHours, setDurationHours] = React.useState(1);
+  const [durationMinutes, setDurationMinutes] = React.useState(0);
+
+  // Populate form when editing
+  React.useEffect(() => {
+    if (editingRecord) {
+      setDate(editingRecord.date);
+      setStartTime(editingRecord.start_time);
+      setDurationHours(editingRecord.duration_hours);
+      setDurationMinutes(editingRecord.duration_minutes);
+    }
+  }, [editingRecord]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const dateObj = new Date(date);
+    const [hours, minutes] = startTime.split(':');
+    
+    // Format: DD/MM/YY HH:MM HH:MM
+    const formatted = `${String(dateObj.getDate()).padStart(2, '0')}/${String(dateObj.getMonth() + 1).padStart(2, '0')}/${String(dateObj.getFullYear() % 100).padStart(2, '0')} ${hours}:${minutes} ${String(durationHours).padStart(2, '0')}:${String(durationMinutes).padStart(2, '0')}`;
+    
+    onSubmit({
+      date,
+ 

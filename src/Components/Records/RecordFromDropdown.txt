@@ -1,0 +1,37 @@
+import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Plus, Save, X, ChevronDown, ChevronUp, Calendar as CalendarIcon } from 'lucide-react';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { format, addMinutes } from 'date-fns';
+import ScrollablePicker from './ScrollablePicker';
+
+export default function RecordFormDropdown({ onSubmit, editingRecord, onCancelEdit }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [date, setDate] = React.useState(new Date());
+  const [startHour, setStartHour] = React.useState(8);
+  const [startMinute, setStartMinute] = React.useState(0);
+  const [durationHours, setDurationHours] = React.useState(1);
+  const [durationMinutes, setDurationMinutes] = React.useState(0);
+
+  React.useEffect(() => {
+    if (editingRecord) {
+      setDate(new Date(editingRecord.date));
+      const [hours, minutes] = editingRecord.start_time.split(':');
+      setStartHour(parseInt(hours, 10));
+      setStartMinute(parseInt(minutes, 10));
+      setDurationHours(editingRecord.duration_hours);
+      setDurationMinutes(editingRecord.duration_minutes);
+      setIsOpen(true);
+    }
+  }, [editingRecord]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const dateStr = format(date, 'yyyy-MM-dd');
+    const startTime = `${String(startHour).padStart(2, '0')}:${String(startMinute).padStart(2, '0')}`;
+ 

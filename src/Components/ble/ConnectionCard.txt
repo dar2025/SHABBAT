@@ -1,0 +1,72 @@
+import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Bluetooth, BluetoothConnected, BluetoothOff, Loader2 } from 'lucide-react';
+import { useBLE } from './BLEService';
+
+export default function ConnectionCard() {
+  const { isConnected, error, connect, disconnect } = useBLE();
+  const [isConnecting, setIsConnecting] = React.useState(false);
+
+  const handleConnect = async () => {
+    setIsConnecting(true);
+    await connect();
+    setIsConnecting(false);
+  };
+
+  return (
+    <Card className="border-2 border-blue-200 shadow-lg bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+      <CardContent className="p-4 space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            {isConnected ? (
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <BluetoothConnected className="w-5 h-5 text-blue-600" />
+              </div>
+            ) : (
+              <div className="p-2 bg-gray-100 rounded-lg">
+                <Bluetooth className="w-5 h-5 text-gray-400" />
+              </div>
+            )}
+            <span className="font-bold text-lg text-gray-800">Bluetooth</span>
+          </div>
+          <Badge 
+            variant={isConnected ? "default" : "secondary"}
+            className={`${isConnected ? "bg-green-500 hover:bg-green-600" : "bg-gray-400"} text-sm px-3 py-1 font-semibold`}
+          >
+            {isConnected ? "Connected" : "Disconnected"}
+          </Badge>
+        </div>
+
+        {isConnected ? (
+          <Button 
+            onClick={disconnect}
+            variant="outline"
+            className="w-full h-10 text-sm font-semibold border-2 hover:bg-red-50 hover:border-red-300"
+          >
+            <BluetoothOff className="w-4 h-4 mr-2" />
+            Disconnect
+          </Button>
+        ) : (
+          <Button 
+            onClick={handleConnect}
+            disabled={isConnecting}
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 h-10 text-sm font-semibold shadow-md"
+          >
+            {isConnecting ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Connecting...
+              </>
+            ) : (
+              <>
+                <Bluetooth className="w-4 h-4 mr-2" />
+                Connect Device
+              </>
+            )}
+          </Button>
+        )}
+      </CardContent>
+    </Card>
+ 
