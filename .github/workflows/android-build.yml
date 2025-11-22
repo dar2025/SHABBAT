@@ -40,9 +40,14 @@ jobs:
           java-version: '17'
 
       # 4. Build Android APK
+# 5. בונה את קובץ ה-APK (כולל תיקון הרשאות סופי)
       - name: Build Android APK
         run: |
+          # מעבר לתיקיית Android
           cd android
+          # ⭐⭐⭐ הוספת chmod +x בתוך הבלוק, לפני ההפעלה! ⭐⭐⭐
+          chmod +x gradlew
+          # הפעלת Gradle לבנייה
           ./gradlew assembleDebug
 
       # 5. Upload the resulting APK file as an artifact
