@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "924307121722",
+    "project_id": "shabbat-602b2",
+    "storage_bucket": "shabbat-602b2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924307121722:android:70899925630a9fe59af703",
+        "android_client_info": {
+          "package_name": "com.esp32.remote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq83JZb2GcdcMClyu68Lo1k0Nm4PmiE1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
