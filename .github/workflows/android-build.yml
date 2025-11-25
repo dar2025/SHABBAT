@@ -3,56 +3,55 @@ name: Android Build
 on:
   push:
     branches:
-      - main # Run this workflow on pushes to the main branch
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+
+      # 1. הורדת קבצי הפרויקט
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # 2. התקנת Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
+      # 3. התקנת ספריות
       - name: Install Dependencies
         run: npm install
 
-      # 1. Build the web assets
+      # 4. בניית נכסי Web
       - name: Build Web Assets
         run: npm run build
 
-      # 2. Sync Capacitor
-      # פקודה זו מעבירה את קבצי ה-web build לתיקיית android הקיימת.
-      # הסרנו את 'npx cap add android' כיוון שהתיקייה כבר נמצאת במאגר.
+      # 5. סנכרון Capacitor
       - name: Sync Capacitor
         run: npx cap sync
 
-      # 3. Set up Java and Gradle
-      - name: Set up JDK
+      # 6. התקנת JDK 17 (גרסה נכונה ל-Gradle/Android)
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          # זוהי הגרסה המומלצת עבור Gradle (Java 17).
-          distribution: 'temurin' 
+          distribution: 'temurin'
           java-version: '17'
+          cache: 'gradle'          # ⭐ מאיץ את זמן הבנייה פי 2–3
 
-      # 4. Build Android APK
-# 5. בונה את קובץ ה-APK (כולל תיקון הרשאות סופי)
+      # 7. בניית APK
       - name: Build Android APK
         run: |
-          # מעבר לתיקיית Android
           cd android
-          # ⭐⭐⭐ הוספת chmod +x בתוך הבלוק, לפני ההפעלה! ⭐⭐⭐
-          chmod +x gradlew
-          # הפעלת Gradle לבנייה
+          chmod +x gradlew        # ⭐ מתקן הרשאות במקרה ש-gradlew הגיע ללא Execute
           ./gradlew assembleDebug
 
-      # 5. Upload the resulting APK file as an artifact
+      # 8. העלאת ה-APK כתוצאה סופית
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+

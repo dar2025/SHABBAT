@@ -1,27 +1,25 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         mavenCentral()
     }
+
     dependencies {
-        // 1. Android Gradle Plugin (AGP) - תיקון קודם
+        // Android Gradle Plugin
         classpath 'com.android.tools.build:gradle:8.1.4'
-        // 2. Google Services
+
+        // Google Services
         classpath 'com.google.gms:google-services:4.4.2'
-        // ⭐ 3. התיקון הקריטי לשגיאת "kotlin-android not found" ⭐
-        // משתמש בגרסת Kotlin שהוגדרה ב-variables.gradle
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.10"
 
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // Kotlin (מתוקן - תאימות ל-AGP 8.1.4)
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22"
     }
 }
 
-// ⭐ 4. יישום הקובץ variables.gradle (מביא את compileSdkVersion) ⭐
+// טוען הגדרות גלובליות (compileSdk וכו')
 apply from: "variables.gradle"
 
 allprojects {

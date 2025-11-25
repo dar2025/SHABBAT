@@ -1,5 +1,0 @@
-{
-	"appId": "com.esp32.remote",
-	"appName": "ble-esp32-remote",
-	"webDir": "dist"
-}

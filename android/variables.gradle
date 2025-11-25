@@ -1,23 +1,40 @@
-ext {
-    // הגדרות SDK קיימות
-    minSdkVersion = 23
-    compileSdkVersion = 35
-    targetSdkVersion = 35
-    
-    // הגדרת גרסאות Java ו-Kotlin גלובליות לפתרון שגיאת "invalid source release: 21"
-    kotlin_stdlib_version = '1.9.24'
-    java_version = '17'
-    
-    // שאר הגרסאות הקיימות
-    androidxActivityVersion = '1.9.2'
-    androidxAppCompatVersion = '1.7.0'
-    androidxCoordinatorLayoutVersion = '1.2.0'
-    androidxCoreVersion = '1.15.0'
-    androidxFragmentVersion = '1.8.4'
-    coreSplashScreenVersion = '1.0.1'
-    androidxWebkitVersion = '1.12.1'
-    junitVersion = '4.13.2'
-    androidxJunitVersion = '1.2.1'
-    androidxEspressoCoreVersion = '3.6.1'
-    cordovaAndroidVersion = '10.1.1'
+ext.set("minSdkVersion", 23)
+ext.set("compileSdkVersion", 35)
+ext.set("targetSdkVersion", 35)
+
+ext.set("javaSourceVersion", JavaVersion.VERSION_19)
+ext.set("javaTargetVersion", JavaVersion.VERSION_19)
+ext.set("kotlinJvmTarget", "19")
+
+ext.set("kotlin_stdlib_version", "1.9.24")
+ext.set("androidxActivityVersion", "1.9.2")
+ext.set("androidxAppCompatVersion", "1.7.0")
+ext.set("androidxCoordinatorLayoutVersion", "1.2.0")
+ext.set("androidxCoreVersion", "1.15.0")
+ext.set("androidxFragmentVersion", "1.8.4")
+ext.set("coreSplashScreenVersion", "1.0.1")
+ext.set("androidxWebkitVersion", "1.12.1")
+ext.set("junitVersion", "4.13.2")
+ext.set("androidxJunitVersion", "1.2.1")
+ext.set("androidxEspressoCoreVersion", "3.6.1")
+ext.set("cordovaAndroidVersion", "10.1.1")
+
+// דריסה של הגדרות Java/Kotlin לכל מודול
+subprojects { sub ->
+    afterEvaluate {
+        if (sub.hasProperty("android")) {
+            sub.android {
+                compileOptions {
+                    sourceCompatibility = JavaVersion.VERSION_19
+                    targetCompatibility = JavaVersion.VERSION_19
+                }
+            }
+        }
+
+        if (sub.hasProperty("kotlinOptions")) {
+            sub.kotlinOptions {
+                jvmTarget = "19"
+            }
+        }
+    }
 }

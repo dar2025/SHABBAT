@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.esp32.remote",
+  "applicationId": "com.shabbat.app",
   "variantName": "debug",
   "elements": [
     {
@@ -16,6 +16,5 @@
       "outputFile": "app-debug.apk"
     }
   ],
-  "elementType": "File",
-  "minSdkVersionForDexing": 23
+  "elementType": "File"
 }
