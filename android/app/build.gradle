@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     namespace "com.esp32.remote"
 
-    // הוספת תאימות מלאה לגרסת Gradle 8 + Java 17
     compileSdkVersion 34
 
     defaultConfig {
@@ -28,11 +27,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-    }
-
-    // תואם גם לקומפיילרים חדשים של Gradle
-    kotlinOptions {
-        jvmTarget = "17"
     }
 }
 
