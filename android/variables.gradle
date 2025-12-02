@@ -1,43 +1,16 @@
-ext.set("minSdkVersion", 23)
-ext.set("compileSdkVersion", 35)
-ext.set("targetSdkVersion", 35)
-
-//
-// ✔ Java / Kotlin versions — FIXED TO 17
-//
-ext.set("javaSourceVersion", JavaVersion.VERSION_17)
-ext.set("javaTargetVersion", JavaVersion.VERSION_17)
-ext.set("kotlinJvmTarget", "17")
-
-ext.set("kotlin_stdlib_version", "1.9.24")
-ext.set("androidxActivityVersion", "1.9.2")
-ext.set("androidxAppCompatVersion", "1.7.0")
-ext.set("androidxCoordinatorLayoutVersion", "1.2.0")
-ext.set("androidxCoreVersion", "1.15.0")
-ext.set("androidxFragmentVersion", "1.8.4")
-ext.set("coreSplashScreenVersion", "1.0.1")
-ext.set("androidxWebkitVersion", "1.12.1")
-ext.set("junitVersion", "4.13.2")
-ext.set("androidxJunitVersion", "1.2.1")
-ext.set("androidxEspressoCoreVersion", "3.6.1")
-ext.set("cordovaAndroidVersion", "10.1.1")
-
-// ✔ Override Java/Kotlin for all modules — FIXED TO 17
-subprojects { sub ->
-    afterEvaluate {
-        if (sub.hasProperty("android")) {
-            sub.android {
-                compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_17
-                    targetCompatibility = JavaVersion.VERSION_17
-                }
-            }
-        }
-
-        if (sub.hasProperty("kotlinOptions")) {
-            sub.kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-    }
+ext {
+    minSdkVersion = 23
+    compileSdkVersion = 35
+    targetSdkVersion = 35
+    androidxActivityVersion = '1.9.2'
+    androidxAppCompatVersion = '1.7.0'
+    androidxCoordinatorLayoutVersion = '1.2.0'
+    androidxCoreVersion = '1.15.0'
+    androidxFragmentVersion = '1.8.4'
+    coreSplashScreenVersion = '1.0.1'
+    androidxWebkitVersion = '1.12.1'
+    junitVersion = '4.13.2'
+    androidxJunitVersion = '1.2.1'
+    androidxEspressoCoreVersion = '3.6.1'
+    cordovaAndroidVersion = '10.1.1'
 }

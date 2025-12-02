@@ -3,15 +3,10 @@
     <color name="ic_launcher_background">#FFFFFF</color>
     <string name="app_name">ble-esp32-remote</string>
     <string name="custom_url_scheme">com.esp32.remote</string>
-    <string name="gcm_defaultSenderId" translatable="false">924307121722</string>
-    <string name="google_api_key" translatable="false">AIzaSyCq83JZb2GcdcMClyu68Lo1k0Nm4PmiE1s</string>
-    <string name="google_app_id" translatable="false">1:924307121722:android:046c7888d2cdef0c9af703</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCq83JZb2GcdcMClyu68Lo1k0Nm4PmiE1s</string>
-    <string name="google_storage_bucket" translatable="false">shabbat-602b2.firebasestorage.app</string>
     <string name="package_name">com.esp32.remote</string>
-    <string name="project_id" translatable="false">shabbat-602b2</string>
     <string name="title_activity_main">ble-esp32-remote</string>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -21,10 +16,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:background">@null</item>
     </style>
-    <style name="AppTheme.NoActionBarLaunch" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
         <item name="android:background">@drawable/splash</item>
-    </style>
-    <style name="Theme.SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 </resources>
